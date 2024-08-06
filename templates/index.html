@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Transcription</title>
+  <link rel="stylesheet" href="/static/stylesmain.css">
+</head>
+<body>
+  <div class="blob"></div>
+  <div class="main-container">
+    <header>
+      <img src="/static/Rogue_Text.png" alt="Rogue Text Logo" class="logo">
+    </header>
+    <section class="upload-section">
+      <form action="/" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="transcriptionType">Choose a transcription type:</label>
+          <br></br>
+          <select name="transcriptionType" id="transcriptionType">
+            <option value="Deepgram">Deepgram</option>
+            <option value="whisper_timestamped">Whisper Timestamped</option>
+          </select>
+          <select name="modelType" id="modelType" style="display: none;">
+            <option value="tiny">Tiny</option>
+            <option value="base" selected>Base</option>
+            <option value="small">Small</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="file">Choose a video file:</label>
+          <br></br>
+          <input type="file" id="file" name="file" accept="video/*">
+        </div>
+        <input type="submit" value="Upload and Transcribe">
+      </form>
+      
+      <script>
+        document.getElementById('transcriptionType').addEventListener('change', function() {
+          var modelTypeDropdown = document.getElementById('modelType');
+          if (this.value === 'whisper_timestamped') {
+            modelTypeDropdown.style.display = 'inline-block';
+          } else {
+            modelTypeDropdown.style.display = 'none';
+          }
+        });
+      </script>
+    </section>
+    <div class="transcribing-container" id="transcribingContainer">
+      <div class="transcribing-message">
+        <p>Transcribing...</p>
+      </div>
+    </div>
+    {% if transcription_complete %}
+    <div class="success-container" id="successContainer">
+      <div class="success-buttons">
+        <a class="workspace-button" href="/workspace">Edit Video</a>
+        <a class="download-button" href="{{ url_for('download', filename=transcript_file.split('/')[-1]) }}">Download Transcript</a>
+        <a class="back-button" href="/">Go Back</a>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  const form = document.querySelector('form');
+  const transcribingContainer = document.getElementById('transcribingContainer');
+  const successContainer = document.getElementById('successContainer');
+
+  form.addEventListener('submit', function() {
+    transcribingContainer.classList.add('show');
+    setTimeout(function() {
+      transcribingContainer.querySelector('.transcribing-message').style.opacity = '1';
+    }, 50);
+    form.style.opacity = '0.5';
+    form.style.pointerEvents = 'none';
+  });
+
+  {% if transcription_complete %}
+  transcribingContainer.classList.remove('show');
+  successContainer.style.display = 'flex';
+  form.style.opacity = '0.5';
+  form.style.pointerEvents = 'none';
+  {% endif %}
+  });
+  </script>
+</body>
+</html>

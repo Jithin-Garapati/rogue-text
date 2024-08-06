@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-based Video Editing Tool</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
+    <link href="/static/styles.css" rel="stylesheet">
+</head>
+<body>
+
+  
+<!-- Embedding the dotlottie-player logo -->
+<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+<div class="logo-container">
+  <dotlottie-player 
+      src="https://lottie.host/4335541f-be65-40d1-ae78-e870ddb77d23/tWbRdMOCxT.json" 
+      background="transparent" 
+      speed="1" 
+      style="width: 500px; height: 500px;" 
+      loop 
+      autoplay>
+  </dotlottie-player>
+
+
+
+</div>
+
+<div class="video-title">
+  <h2 class="video-title" id="videoTitle"></h2>
+</div>
+<!-- Blob div for additional design -->
+<div class="blob">
+</div>
+
+<div class="container">
+
+
+  <div id="actionMessage" class="action-message"></div>
+  
+  
+  <div class="search-button-container">
+    <button id="openSearchButton" class="search-button">Search Word</button>
+  </div>
+  <div class="video-container">
+    <video id="video" class="video-js vjs-default-skin" controls preload="auto">
+      <source src="/uploads/video.mp4" type="video/mp4"/>
+    </video>
+    <div id="subtitles-container"></div>
+  </div>
+  <div class="transcript" id="transcript"></div>
+  <button id="downloadButton" style="display:none;">Download Edited Transcript</button>
+</div>
+
+<div id="searchOverlay" class="search-overlay">
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search for a word">
+    <button id="searchButton">Search</button>
+    <button id="closeSearchButton">Close</button>
+  </div>
+  <div id="searchResults" class="search-results"></div>
+</div>
+
+<form id="edit-form">
+</form>
+
+<button id="removeSilence" class="button" style="--color:#000000;">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  Remove Silences
+</button>
+
+<div class="export-container">
+  <button id="exportButton" class="button" style="--color:#000000;">
+    Export Video
+    <span class="settings-icon">&#9881;</span>
+  </button>
+  <div id="exportSettings" class="export-settings">
+    <div class="export-option">
+      <label for="resolutionSelect">Resolution:</label>
+      <select id="resolutionSelect">
+        <option value="1080p">1080p</option>
+        <option value="720p">720p</option> 
+        <option value="1440p">1440p</option>
+      </select>
+    </div>
+    <div class="export-option">
+      <label for="formatSelect">Format:</label>
+      <select id="formatSelect">
+        <option value="mp4">MP4</option>
+        <option value="avi">AVI</option>
+        <option value="mov">MOV</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div id="exportOverlay" class="overlay" style="display: none;">
+  <div class="spinner"></div>
+  <p>Exporting video...</p>
+</div>
+
+<script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
+<script src="/static/script.js"></script>
+<button id="saveChangesBtn" onclick="saveChanges()">Save Changes</button>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const transcriptData = {{ transcript_data|tojson|safe }};
+        initializeTranscript(transcriptData);
+    });
+</script>
+</body>
+</html>

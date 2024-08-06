@@ -1,0 +1,444 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000000; /* Very dark grey for the body */
+  color: #E0E0E0; /* Soft white for text */
+  font-family: 'Helvetica Neue', Arial, sans-serif; /* Modern font */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.main-container {
+  width: 50%;
+  margin: auto;
+  padding: 2rem;
+  background-color: rgba(12, 12, 12, 0.65); /* Slightly more transparent */
+  border-radius: 8px;
+  backdrop-filter: blur(10px); /* Applying a blur effect to the background content */
+  -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
+  border: 1px solid rgba(255, 255, 255, 0.18); /* Optional: adding a slight border to mimic light reflection */
+}
+
+
+/* Style the header */
+header {
+  margin-bottom: 50px;
+}
+
+h1 {
+  font-family: 'Arial', sans-serif; /* Consistency in font */
+  color: #76FF03; /* Vibrant green as per screenshot */
+  font-size: 3em; /* Increased size for emphasis */
+  margin-bottom: 10px;
+}
+
+form {
+  
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Add padding to each option element */
+select#transcriptionType option {
+  padding: 5px; /* Adjust the value as needed */
+  background: #171717; /* Optional: set a background color for the options */
+  color: white; /* Optional: set a text color for the options */
+}
+
+/* You may also want to style the select element itself */
+select#transcriptionType {
+  background: #111; /* Background color for the select box */
+  color: #acacac; /* Color of the select box text */
+  border-radius: 15px; /* Rounded corners for the select box */
+  padding: 5px; /* Padding inside the select box */
+  border: 1px solid #7e7e7e; /* Border color for the select box */
+}
+
+/* Style the logo */
+.logo {
+  max-width: 100px; /* Smaller logo for a more subtle appearance */
+  margin-bottom: 0.1rem;
+  filter: brightness(0) invert(1);
+}
+
+label {
+  margin-bottom: 0.5rem; /* Add some space directly below the label */
+}
+
+input[type="file"], input[type="submit"], select {
+
+  background: #333333; /* Dark elements with contrast to the body */
+  color: #FFFFFF; /* White text for visibility */
+  border: 1px solid #7e7e7e; /* Border the same color as background for seamless design */
+}
+
+
+a {
+  text-decoration: none; /* This will remove underlines from all <a> elements */
+}
+
+input[type="submit"]:hover, .download-button:hover, .workspace-button:hover {
+  background-color: #000623; /* Green background on hover for interactivity */
+  color: #FFFFFF; /* Ensure text remains white on hover */
+}
+
+/* Style the download link and workspace button */
+.download-button, .workspace-button {
+  font-family: 'Arial', sans-serif; /* Choose the font you prefer */
+  font-size: 50px; /* Set the font size larger as per your preference */
+  font-weight: bold; /* Optional: if you want the font to be bold */
+  border: 0;
+  background: #333333;
+  color: #FFFFFF;
+  padding: 0.7em;
+  font-size: 0.85em;
+  border-radius: 14px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+select, input[type="file"], input[type="submit"] {
+  padding: 0.4em;
+  border-radius: 4px;
+  background: #121212;
+  border: 1px solid #7e7e7e;
+  color: #fff;
+  font-size: 0.9em;
+  cursor: pointer; /* Makes it clear these are interactive elements */
+}
+
+/* Adjustments to ensure consistency and alignment */
+input[type="submit"] {
+  align-self: center; /* Center the submit button if desired */
+  margin-top: 1rem; /* Add space above the submit button */
+}
+
+input[type="submit"]:hover {
+  background-color: #061f78; /* Darker shade on hover */
+}
+
+@media (max-width: 768px) {
+  .main-container {
+      width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-container {
+      width: 95%;
+      padding: 1rem;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+.content {
+  --_gap: 1.5rem;
+  --_color: hsl(60 92% 71% / 1);
+  width: 58%;
+  max-width: 500px;
+  padding: 2.75rem;
+  border: 2px solid hsl(60deg 67% 44% / 64%);
+  border-radius: 20px;
+  color: var(--_color);
+}
+
+.content p {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: var(--_gap);
+}
+
+.content span {
+  font-size: 1.3em;
+  letter-spacing: 1.3px;
+  line-height: 1.2;
+}
+
+.content button {
+  display: block;
+  margin-top: var(--_gap);
+  padding: 0.6em 0.9em;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  background: #020043;
+  margin-left: auto;
+  color: var(--_color);
+}
+
+.blob {
+  position: absolute;
+  opacity: 0.5;
+  width: 300px;
+  aspect-ratio: 1/1;
+  animation: animate 10s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite
+    alternate forwards;
+  filter: blur(40px);
+  z-index: -1;
+  background: linear-gradient(
+    47deg,
+    rgb(3, 16, 154) 21%,
+    rgb(3, 0, 173) 67%,
+    rgb(77, 74, 166) 81%
+  );
+
+  /*  Optional  */
+  /*   box-shadow: inset 50px 50px 17px 0px #ff588b,
+    inset 100px 100px 17px 0px #66319f; */
+}
+
+@keyframes animate {
+  0% {
+    translate: 40% -25%;
+    border-radius: 60% 40% 30% 70% / 100% 85% 92% 74%;
+  }
+  50% {
+    translate: 0% 13%;
+    border-radius: 20% 71% 47% 70% / 81% 15% 22% 54%;
+    rotate: 41deg;
+    scale: 1.00;
+  }
+  100% {
+    translate: -45% 39%;
+    border-radius: 100% 75% 92% 74% / 60% 80% 30% 70%;
+    rotate: -60deg;
+    scale: 1.05;
+  }
+}
+
+
+.loading-container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(5, 5, 5, 0.692);
+  z-index: 9999;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  background: rgba(5, 5, 5, 0.8);
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  border: 1px solid rgba(20, 20, 20, 0.9);
+  box-shadow: 0 6px 30px 0 rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+
+/* ... (previous CSS remains the same) ... */
+
+
+/* ... (previous CSS remains the same) ... */
+
+.transcribing-container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(5, 5, 5, 0.9);
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.transcribing-container.show {
+  display: flex;
+  opacity: 1;
+}
+
+.transcribing-message {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.transcribing-container.show .transcribing-message {
+  opacity: 1;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+
+.success-container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(5, 5, 5, 0.9);
+  z-index: 9999;
+  display: flex; /* Changed from 'none' to 'flex' to make container visible */
+  animation: fadeIn 4s ease, blurOut 4s ease;
+}
+
+.workspace-button {
+  --black: #000000;
+  --ch-black: #141414;
+  --eer-black: #1b1b1b;
+  --night-rider: #2e2e2e;
+  --white: #ffffff;
+  --af-white: #f3f3f3;
+  --ch-white: #e1e1e1;
+  border-radius: 8px;
+  width: 200px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0px 15px;
+  border: none;
+  color: white;
+  position: relative;
+  cursor: pointer;
+  font-weight: 200;
+  transition-duration: .2s;
+  background-color: var(--ch-black);
+  }
+  
+  .workspace-button:before,.workspace-button:after{
+    content: '';
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  border-radius: 10px;
+  background: linear-gradient(45deg, 
+  var(--ch-black), var(--eer-black),
+  var(--night-rider), var(--ch-white), var(--night-rider), 
+	var(--eer-black), var(--ch-black),var(--ch-black));
+  background-size: 400%;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: -1;
+  animation: steam 20s linear infinite;
+}
+
+@keyframes steam {
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 400% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.button:after {
+  filter: blur(50px);
+}
+
+.download-button {
+  --black: #000000;
+  --ch-black: #141414;
+  --eer-black: #1b1b1b;
+  --night-rider: #2e2e2e;
+  --white: #ffffff;
+  --af-white: #f3f3f3;
+  --ch-white: #e1e1e1;
+  border-radius: 8px;
+  width: 200px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0px 15px;
+  border: none;
+  color: white;
+  position: relative;
+  cursor: pointer;
+  font-weight: 200;
+  transition-duration: .2s;
+  background-color: var(--ch-black);
+  }
+.download-button:before,.download-button:after{
+    content: '';
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  border-radius: 10px;
+  background: linear-gradient(45deg, 
+  var(--ch-black), var(--eer-black),
+  var(--night-rider), var(--ch-white), var(--night-rider), 
+	var(--eer-black), var(--ch-black),var(--ch-black));
+  background-size: 400%;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: -1;
+  animation: steam 20s linear infinite;
+}
+
+@keyframes steam {
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 400% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+.back-button {
+  color: rgb(139, 160, 255);
+}
+.button:after {
+  filter: blur(50px);
+}
+
+.success-buttons {
+  display: flex;
+  flex-direction: column; /* Stacks children vertically */
+  justify-content: center; /* Centers children vertically in the container */
+  align-items: center; /* Centers children horizontally in the container */
+  gap: 20px;
+  margin-top: 40px;
+}
